@@ -6,12 +6,11 @@ knex.schema.hasTable('user').then((exists) => {
     if (!exists) {
         return knex.schema.createTable('user', (table) => {
             table.increments('ID')
-            table.string('Name')
+            table.string('First_Name')
+            table.string('Last_Name')
             table.string('Email').unique();
-            table.string('Password').unique();
-            table.string('SuperAdmin')
-            table.string('Accessible_by_SuperAdmin')
-            table.string('Admin')
+            table.string('Password')
+            table.string('Image')
         })
         .catch((err) => {
             console.log(err,"There is some err while writing the quety")
