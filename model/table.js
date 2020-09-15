@@ -23,6 +23,8 @@ knex.schema.hasTable('place').then((exists) => {
     if (!exists) {
         return knex.schema.createTable('place', (table) => {
             table.increments('ID')
+            table.integer("user_ID").unsigned()
+            table.foreign("user_ID").references("user.ID")
             table.string('Title')
             table.string('Description')
             table.string('Address')
