@@ -33,4 +33,12 @@ let putdata = (ID,updata) => {
     return knex('place').update(updata).where('ID',ID)
 };
 
-module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata}
+// 6 Retrieve list of all places for a given user id
+let getuserID = (ID) => {
+    return knex('user')
+    .select('place.Title', 'Description','Address','Location','user.Image')
+    .join('place','user.ID','=','place.ID')
+    .where('place.ID',ID)
+};
+
+module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID}

@@ -106,4 +106,15 @@ Instagram.put('/put/:ID',(req,res) => {
     })
 });
 
+// 6 Retrieve list of all places for a given user id
+Instagram.get('/user/:ID',(req,res) => {
+    var ID = req.params.ID
+    InstagramDB.getuserID(ID)
+    .then((Response) => {
+        res.send(Response)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Instagram
