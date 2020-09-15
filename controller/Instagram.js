@@ -117,4 +117,15 @@ Instagram.get('/user/:ID',(req,res) => {
     })
 });
 
+// 7 Get a specific place by place id
+Instagram.get('/place/:ID',(req,res) => {
+    var ID = req.params.ID
+    InstagramDB.getplaceID(ID)
+    .then((Response) => {
+        res.send(Response)
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Instagram

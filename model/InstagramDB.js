@@ -41,4 +41,9 @@ let getuserID = (ID) => {
     .where('place.ID',ID)
 };
 
-module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID}
+// 7 Get a specific place by place id
+let getplaceID = (ID) => {
+    return knex.select('place.Title', 'Description','Address','Location').from('place').where('place.ID',ID)
+};
+
+module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID,getplaceID}
