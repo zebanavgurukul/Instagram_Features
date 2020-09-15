@@ -46,4 +46,9 @@ let getplaceID = (ID) => {
     return knex.select('place.Title', 'Description','Address','Location').from('place').where('place.ID',ID)
 };
 
-module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID,getplaceID}
+// 8 Delete a place by place id
+let delete_data = (ID) => {
+    return knex('place').where("place.ID",ID).del()
+};
+
+module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID,getplaceID,delete_data}

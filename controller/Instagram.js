@@ -128,4 +128,15 @@ Instagram.get('/place/:ID',(req,res) => {
     })
 });
 
+//  8 Delete a place by place id
+Instagram.delete('/delete/:ID',(req,res) => {
+    var ID = req.params.ID
+    InstagramDB.delete_data(ID)
+    .then(() => {
+        res.send('delete')
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 module.exports = Instagram
