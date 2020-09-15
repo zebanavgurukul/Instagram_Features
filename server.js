@@ -4,8 +4,8 @@ const app = express();
 app.use(bodyParser.json())
 
 const Instagram = require("./controller/Instagram")
-app.use("/Instagram",Instagram)
+app.use("/",Instagram)
 
-app.listen(6000, () => {
-    console.log("server is listening 6000.........")
+app.listen(8000, () => {
+    console.log("server is listening 7000.........")
 });

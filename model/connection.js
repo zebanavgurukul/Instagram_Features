@@ -1,14 +1,14 @@
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 const knex = require ("knex");
 
 const connection = {
     client : "mysql",
     connection : {
-        host: process.env.Host,
-        user: process.env.User,
-        password: process.env.Password,
-        database: process.env.Database
+        host: "127.0.0.1",
+        user: "root",
+        password: "Nav@zeba123456789",
+        database: "Instagram_Features"
     }
 };
 // console.log(connection)
