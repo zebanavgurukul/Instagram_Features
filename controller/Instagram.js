@@ -15,7 +15,7 @@ Instagram.post("/sing",(req,res)=>{
     }
     InstagramDB.sign_in(data)
     .then(()=>{
-        res.send("inserted data.............................")
+        res.send("inserted data................")
     }).catch((err)=>{
         res.send(err)
         console.log(err);
@@ -39,7 +39,7 @@ Instagram.post("/login",(req,res)=>{
                 let token = jwt.sign({"costomer":data},"zeba")
                     // console.log(token)
                     res.cookie(token)
-                    res.send('loing successful')
+                    res.send('..........loing successful..........')
                 }
             })
         }
@@ -63,7 +63,7 @@ Instagram.delete('/deleteuser/:ID',(req,res) => {
     var ID = req.params.ID
     InstagramDB.deleteuser_data(ID)
     .then(() => {
-        res.send('delete')
+        res.send('#....delete....#')
     }).catch((err) => {
         res.send(err)
     })
@@ -88,7 +88,7 @@ Instagram.post('/Createplace',(req,res) => {
         }
         InstagramDB.postdata(placedata)
         .then(() => {
-            res.send("insert...............................")
+            res.send("@.....insert.....@")
         }).catch((err) => {
             res.send(err)
         })
@@ -110,7 +110,7 @@ Instagram.put('/put/:ID',(req,res) => {
         }
         InstagramDB.putdata(ID,updata)
         .then(() => {
-            res.send('update')
+            res.send('$.....update.....$')
         }).catch((err) => {
             res.send(err)
         })
@@ -144,7 +144,7 @@ Instagram.delete('/deleteplace/:ID',(req,res) => {
     var ID = req.params.ID
     InstagramDB.delete_data(ID)
     .then(() => {
-        res.send('delete')
+        res.send('!.....delete......!')
     }).catch((err) => {
         res.send(err)
     })
