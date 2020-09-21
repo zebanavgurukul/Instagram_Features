@@ -19,21 +19,22 @@ let dataAll_list = () => {
     return knex.select('*').from('user')
 };
 
-// 4 Create a new place
-let getuser = (ID) => {
-    return knex.select('*').from('user').where('user.ID',ID)
+// 4 Delete a user by user id
+let deleteuser_data = (ID) => {
+    return knex('user').where("user.ID",ID).del()
 };
 
+// 5 Create a new place
 let postdata = (placedata) => {
     return knex('place').insert(placedata)
 };
 
-// 5 update a place by ID
+// 6 update a place by ID
 let putdata = (ID,updata) => {
     return knex('place').update(updata).where('ID',ID)
 };
 
-// 6 Retrieve list of all places for a given user id
+// 7 Retrieve list of all places for a given user id
 let getuserID = (ID) => {
     return knex('user')
     .select('place.Title', 'Description','Address','Location','user.Image')
@@ -41,14 +42,14 @@ let getuserID = (ID) => {
     .where('place.ID',ID)
 };
 
-// 7 Get a specific place by place id
+// 8 Get a specific place by place id
 let getplaceID = (ID) => {
     return knex.select('place.Title', 'Description','Address','Location').from('place').where('place.ID',ID)
 };
 
-// 8 Delete a place by place id
+// 9 Delete a place by place id
 let delete_data = (ID) => {
     return knex('place').where("place.ID",ID).del()
 };
 
-module.exports = {sign_in,login_Email,login_Password,dataAll_list,getuser,postdata,putdata,getuserID,getplaceID,delete_data}
+module.exports = {sign_in,login_Email,login_Password,dataAll_list,deleteuser_data,postdata,putdata,getuserID,getplaceID,delete_data}

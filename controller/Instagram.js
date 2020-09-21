@@ -15,7 +15,7 @@ Instagram.post("/sing",(req,res)=>{
     }
     InstagramDB.sign_in(data)
     .then(()=>{
-        res.send("inserted data ")
+        res.send("inserted data.............................")
     }).catch((err)=>{
         res.send(err)
         console.log(err);
@@ -58,8 +58,19 @@ Instagram.get('/getalldata',(req,res) => {
     })
 });
 
+// 4 Delete a user by user id
+Instagram.delete('/deleteuser/:ID',(req,res) => {
+    var ID = req.params.ID
+    InstagramDB.deleteuser_data(ID)
+    .then(() => {
+        res.send('delete')
+    }).catch((err) => {
+        res.send(err)
+    })
+});
+
 // API Place
-// 4 Create a new place
+// 5 Create a new place
 Instagram.post('/Createplace',(req,res) => {
     let alltoken = req.headers.cookie
     var token = alltoken.split('=')
@@ -84,7 +95,7 @@ Instagram.post('/Createplace',(req,res) => {
     })
 });
 
-// 5 update a place by ID
+// 6 update a place by ID
 Instagram.put('/put/:ID',(req,res) => {
     var ID = req.params.ID
     let alltoken = req.headers.cookie
@@ -106,7 +117,7 @@ Instagram.put('/put/:ID',(req,res) => {
     })
 });
 
-// 6 Retrieve list of all places for a given user id
+// 7 Retrieve list of all places for a given user id
 Instagram.get('/user/:ID',(req,res) => {
     var ID = req.params.ID
     InstagramDB.getuserID(ID)
@@ -117,7 +128,7 @@ Instagram.get('/user/:ID',(req,res) => {
     })
 });
 
-// 7 Get a specific place by place id
+// 8 Get a specific place by place id
 Instagram.get('/place/:ID',(req,res) => {
     var ID = req.params.ID
     InstagramDB.getplaceID(ID)
@@ -128,8 +139,8 @@ Instagram.get('/place/:ID',(req,res) => {
     })
 });
 
-//  8 Delete a place by place id
-Instagram.delete('/delete/:ID',(req,res) => {
+// 9 Delete a place by place id
+Instagram.delete('/deleteplace/:ID',(req,res) => {
     var ID = req.params.ID
     InstagramDB.delete_data(ID)
     .then(() => {
