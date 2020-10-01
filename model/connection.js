@@ -7,7 +7,7 @@ const connection = {
     connection : {
         host: "127.0.0.1",
         user: "root",
-        password: "Nav@zeba123456789",
+        password: "*****************",
         database: "Instagram_Features"
     }
 };
