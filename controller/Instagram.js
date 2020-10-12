@@ -85,9 +85,7 @@ Instagram.post('/Createplace',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result)=>{
-        // console.log(result)
         var userID = result["costomer"][0]["ID"]
-        // console.log(userID);
         var placedata = {
             user_ID : userID,
             Title : req.body.Title,
@@ -111,18 +109,19 @@ Instagram.put('/put/:ID',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result) => {
-        var updata = {
-            Title : req.body.Title,
-            Description : req.body.Description,
-            Address : req.body.Address,
-            Location : req.body.Location
-        }
-        InstagramDB.putdata(ID,updata)
-        .then(() => {
-            res.send('$.....update.....$')
-        }).catch((err) => {
-            res.send(err)
-        })
+        console.log(result);
+        // var updata = {
+        //     Title : req.body.Title,
+        //     Description : req.body.Description,
+        //     Address : req.body.Address,
+        //     Location : req.body.Location
+        // }
+        // InstagramDB.putdata(ID,updata)
+        // .then(() => {
+        //     res.send('$.....update.....$')
+        // }).catch((err) => {
+        //     res.send(err)
+        // })
     })
 });
 
