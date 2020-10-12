@@ -39,7 +39,7 @@ Instagram.post("/login",(req,res)=>{
                 let token = jwt.sign({"costomer":data},"zeba")
                     // console.log(token)
                     res.cookie(token)
-                    res.send('..........loing successful..........')
+                    res.send('..........login successful..........')
                 }
             })
         }
@@ -65,12 +65,16 @@ Instagram.delete('/deleteuser/:ID',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result)=>{
-        InstagramDB.deleteuser_data(ID)
-        .then(() => {
-            res.send('#....delete....#')
-        }).catch((err) => {
-            res.send(err)
-        })
+        var userID = result["costomer"][0]['ID']
+        if (userID == ID){
+            InstagramDB.deleteuser_data(ID)
+            .then(() => {
+                res.send('#....delete....#')
+            }).catch((err) => {
+                res.send(err)
+            })
+        }
+        res.send("you can't access delete the data")
     })
 });
 
