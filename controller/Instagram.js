@@ -1,6 +1,6 @@
 const express = require("express");
 const Instagram = express();
-const InstagramDB   = require("../model/InstagramDB")
+const InstagramDB = require("../model/InstagramDB")
 var jwt = require('jsonwebtoken');
 
 // API user
@@ -61,11 +61,16 @@ Instagram.get('/getalldata',(req,res) => {
 // 4 Delete a user by user id
 Instagram.delete('/deleteuser/:ID',(req,res) => {
     var ID = req.params.ID
-    InstagramDB.deleteuser_data(ID)
-    .then(() => {
-        res.send('#....delete....#')
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,500)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InstagramDB.deleteuser_data(ID)
+        .then(() => {
+            res.send('#....delete....#')
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
@@ -120,33 +125,74 @@ Instagram.put('/put/:ID',(req,res) => {
 // 7 Retrieve list of all places for a given user id
 Instagram.get('/user/:ID',(req,res) => {
     var ID = req.params.ID
-    InstagramDB.getuserID(ID)
-    .then((Response) => {
-        res.send(Response)
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,500)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InstagramDB.getuserID(ID)
+        .then((Response) => {
+            res.send(Response)
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
 // 8 Get a specific place by place id
 Instagram.get('/place/:ID',(req,res) => {
     var ID = req.params.ID
-    InstagramDB.getplaceID(ID)
-    .then((Response) => {
-        res.send(Response)
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,500)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InstagramDB.getplaceID(ID)
+        .then((Response) => {
+            res.send(Response)
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 
 // 9 Delete a place by place id
 Instagram.delete('/deleteplace/:ID',(req,res) => {
     var ID = req.params.ID
-    InstagramDB.delete_data(ID)
-    .then(() => {
-        res.send('!.....delete......!')
-    }).catch((err) => {
-        res.send(err)
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,500)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InstagramDB.delete_data(ID)
+        .then(() => {
+            res.send('!.....delete......!')
+        }).catch((err) => {
+            res.send(err)
+        })
+    })
+});
+
+// Get a specific user by search
+Instagram.get('/getsearch/:search', (req,res) => {
+    var search = req.params.search
+    let alltoken = req.headers.cookie
+    var token = alltoken.split('=')
+    token = (token[token.length-2]).slice(11,500)
+    jwt.verify(token,"zeba",(err,result)=>{
+        InstagramDB.get_search(search)
+        .then((Response) => {
+            let allsearch = {
+                First_Name : Response[0]["First_Name"],
+                Last_Name : Response[0]["Last_Name"],
+                Email : Response[0]["Email"],
+                Image : Response[0]["Image"],
+                Title : Response[0]["Title"],
+                Description : Response[0]["Description"],
+                Address : Response[0]["Address"],
+                Location : Response[0]["Location"]
+            }
+            res.send(allsearch)
+        }).catch((err) => {
+            res.send(err)
+        })
     })
 });
 

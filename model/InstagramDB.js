@@ -1,4 +1,4 @@
-const knex = require("./connection"); 
+const knex = require("../connection"); 
 
 // 1 Sign_in
 let sign_in = (data) => {
@@ -52,4 +52,12 @@ let delete_data = (ID) => {
     return knex('place').where("place.ID",ID).del()
 };
 
-module.exports = {sign_in,login_Email,login_Password,dataAll_list,deleteuser_data,postdata,putdata,getuserID,getplaceID,delete_data}
+// Get a specific user by search
+let get_search = (search) => {
+    return knex("user")
+    .join("place","user.ID","=","place.ID")
+    .select("*")
+    .where('First_Name','like',  '%' +search+ '%')
+}
+
+module.exports = {sign_in,login_Email,login_Password,dataAll_list,deleteuser_data,postdata,putdata,getuserID,getplaceID,delete_data,get_search}

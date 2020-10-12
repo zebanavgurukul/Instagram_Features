@@ -7,5 +7,6 @@ const Instagram = require("./controller/Instagram")
 app.use("/",Instagram)
 
 app.listen(8000, () => {
-    console.log("server is listening 7000.........")
+    console.log("server is listening 8000.........")
 });
+
