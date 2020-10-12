@@ -124,6 +124,7 @@ Instagram.put('/put/:ID',(req,res) => {
                 res.send(err)
             })
         }
+        res.send("you can't access update ID data")
     })
 });
 
@@ -143,6 +144,7 @@ Instagram.get('/user/:ID',(req,res) => {
                 res.send(err)
             })
         }
+        res.send("you can't access get (user id) ID data")
     })
 });
 
@@ -153,28 +155,35 @@ Instagram.get('/place/:ID',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result)=>{
-        InstagramDB.getplaceID(ID)
-        .then((Response) => {
-            res.send(Response)
-        }).catch((err) => {
-            res.send(err)
-        })
+        var placeID = result["costomer"][0]['ID']
+        if (placeID == ID){
+            InstagramDB.getplaceID(ID)
+            .then((Response) => {
+                res.send(Response)
+            }).catch((err) => {
+                res.send(err)
+            })
+        }
+        res.send("you can't access get (place id) ID data")
     })
 });
 
 // 9 Delete a place by place id
 Instagram.delete('/deleteplace/:ID',(req,res) => {
-    var ID = req.params.ID
+    var placeID = req.params.ID
     let alltoken = req.headers.cookie
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result)=>{
-        InstagramDB.delete_data(ID)
-        .then(() => {
-            res.send('!.....delete......!')
-        }).catch((err) => {
-            res.send(err)
-        })
+        var userID = result["costomer"][0]['ID']
+        if (userID == placeID){
+            InstagramDB.delete_data(placeID)
+            .then(() => {
+                res.send('!.....delete......!')
+            }).catch((err) => {
+                res.send(err)
+            })
+        }
     })
 });
 
