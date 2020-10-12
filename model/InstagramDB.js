@@ -35,11 +35,11 @@ let putdata = (ID,updata) => {
 };
 
 // 7 Retrieve list of all places for a given user id
-let getuserID = (ID) => {
+let getuserID = (user_ID) => {
     return knex('user')
     .select('place.Title', 'Description','Address','Location','user.Image')
     .join('place','user.ID','=','place.ID')
-    .where('place.ID',ID)
+    .where('place.user_ID',user_ID)
 };
 
 // 8 Get a specific place by place id

@@ -109,19 +109,21 @@ Instagram.put('/put/:ID',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result) => {
-        console.log(result);
-        // var updata = {
-        //     Title : req.body.Title,
-        //     Description : req.body.Description,
-        //     Address : req.body.Address,
-        //     Location : req.body.Location
-        // }
-        // InstagramDB.putdata(ID,updata)
-        // .then(() => {
-        //     res.send('$.....update.....$')
-        // }).catch((err) => {
-        //     res.send(err)
-        // })
+        var placeID = result["costomer"][0]['ID']
+        if (placeID == ID){
+            var updata = {
+                Title : req.body.Title,
+                Description : req.body.Description,
+                Address : req.body.Address,
+                Location : req.body.Location
+            }
+            InstagramDB.putdata(ID,updata)
+            .then(() => {
+                res.send('$.....update.....$')
+            }).catch((err) => {
+                res.send(err)
+            })
+        }
     })
 });
 
@@ -132,12 +134,15 @@ Instagram.get('/user/:ID',(req,res) => {
     var token = alltoken.split('=')
     token = (token[token.length-2]).slice(11,500)
     jwt.verify(token,"zeba",(err,result)=>{
-        InstagramDB.getuserID(ID)
-        .then((Response) => {
-            res.send(Response)
-        }).catch((err) => {
-            res.send(err)
-        })
+        var userID = result["costomer"][0]['ID']
+        if (userID == ID){
+            InstagramDB.getuserID(ID)
+            .then((Response) => {
+                res.send(Response)
+            }).catch((err) => {
+                res.send(err)
+            })
+        }
     })
 });
 
