@@ -184,32 +184,28 @@ Instagram.delete('/deleteplace/:ID',(req,res) => {
                 res.send(err)
             })
         }
+        res.send("you can't access delete the data")
     })
 });
 
 // Get a specific user by search
 Instagram.get('/getsearch/:search', (req,res) => {
     var search = req.params.search
-    let alltoken = req.headers.cookie
-    var token = alltoken.split('=')
-    token = (token[token.length-2]).slice(11,500)
-    jwt.verify(token,"zeba",(err,result)=>{
-        InstagramDB.get_search(search)
-        .then((Response) => {
-            let allsearch = {
-                First_Name : Response[0]["First_Name"],
-                Last_Name : Response[0]["Last_Name"],
-                Email : Response[0]["Email"],
-                Image : Response[0]["Image"],
-                Title : Response[0]["Title"],
-                Description : Response[0]["Description"],
-                Address : Response[0]["Address"],
-                Location : Response[0]["Location"]
-            }
-            res.send(allsearch)
-        }).catch((err) => {
-            res.send(err)
-        })
+    InstagramDB.get_search(search)
+    .then((Response) => {
+        let allsearch = {
+            First_Name : Response[0]["First_Name"],
+            Last_Name : Response[0]["Last_Name"],
+            Email : Response[0]["Email"],
+            Image : Response[0]["Image"],
+            Title : Response[0]["Title"],
+            Description : Response[0]["Description"],
+            Address : Response[0]["Address"],
+            Location : Response[0]["Location"]
+        }
+        res.send(allsearch)
+    }).catch((err) => {
+        res.send(err)
     })
 });
 

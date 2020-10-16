@@ -55,9 +55,9 @@ let delete_data = (ID) => {
 // Get a specific user by search
 let get_search = (search) => {
     return knex("user")
-    .join("place","user.ID","=","place.ID")
+    .join("place","user.ID","place.user_ID")
     .select("*")
     .where('First_Name','like',  '%' +search+ '%')
-}
+};
 
 module.exports = {sign_in,login_Email,login_Password,dataAll_list,deleteuser_data,postdata,putdata,getuserID,getplaceID,delete_data,get_search}
